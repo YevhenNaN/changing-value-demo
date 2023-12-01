@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ps-settings-api-deployment
+  labels:
+    app: ps-settings-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ps-settings-api
+  template:
+    metadata:
+      labels:
+        app: ps-settings-api
+    spec:
+      containers:
+        - env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: ASPNETCORE_URLS
+              value: http://+:5003
+            - name: CONNECTIONSTRINGS__DATABASE
+              value: Server=ps-settings-api-db-service;Port=5432;Database=settings_db;User ID=postgres;Password=postgres
+          image: 690387575929.dkr.ecr.us-east-1.amazonaws.com/synergy-settings-backend:{{ .Values.apiVersion }}
+          name: ps-settings-api
+          ports:
+            - containerPort: 5003
+          resources: {}
+      restartPolicy: Always

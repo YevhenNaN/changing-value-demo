@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ps-settings-ui-deployment
+  labels:
+    app: ps-settings-ui
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ps-settings-ui
+  template:
+    metadata:
+      labels:
+        app: ps-settings-ui
+    spec:
+      containers:
+        - env:
+            - name: PS_SETTINGS_API_URL
+              value: http://ps-settings-api-service:5003
+            - name: SERVER_NAME
+              value: ps-settings-ui-service
+          image: 690387575929.dkr.ecr.us-east-1.amazonaws.com/synergy-settings-ui:{{ .Values.uiVersion }}
+          name: ps-settings-ui
+          ports:
+            - containerPort: 80
+      restartPolicy: Always

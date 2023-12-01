@@ -1,0 +1,4 @@
+apiVersion: v2
+name: offline-configurator-chart
+description: Creates Offline Configuration BE and FE
+version: 1.0.0

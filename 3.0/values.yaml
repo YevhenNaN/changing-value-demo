@@ -1,0 +1,45 @@
+services:
+  synergy-settings-api:
+    enabled: true
+    version: 0.34.0
+    livenessProbeEnabled: false
+    readinessProbeEnabled: false
+    isClusterIdRequired: false
+    isPostgresWriteRequired: false
+    isPostgresReadRequired: false
+    metricsEnabled: false
+
+  synergy-settings-ui:
+    enabled: true
+    version: 0.43.1
+    livenessProbeEnabled: false
+    readinessProbeEnabled: false
+    scaling:
+      minReplicas: 1
+      maxReplicas: 1
+      cpuUtilization: 81
+
+  test_repo:
+    enabled: true
+    version: ajay2
+    scaling:
+      minReplicas: 1
+      maxReplicas: 1
+      cpuUtilization: 81
+      memoryUtilization: 80
+      grpcRequestAverageValue: 100
+    lifeCycleHooks:
+      post-install: true
+    image: 123
+    route: /
+    rewrite: false
+    name: 123
+    targetPort: 80
+    request:
+      cpu: 500m
+      memory: 500Mi
+    limits:
+      cpu: 1000m
+      memory: 1000Mi
+    includeBearerToken: false
+    envs:

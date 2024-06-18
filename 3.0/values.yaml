@@ -11,7 +11,7 @@ services:
 
   synergy-settings-ui:
     enabled: true
-    version: 4.3232
+    version: 4.3212
     livenessProbeEnabled: false
     readinessProbeEnabled: false
     scaling:
